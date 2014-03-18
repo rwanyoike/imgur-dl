@@ -60,9 +60,9 @@ class Imgur(object):
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description='Download albums from imgur')
+    parser = argparse.ArgumentParser(description='Download albums from imgur.')
     parser.add_argument('client_id', metavar='client-id',  help='imgur api client id')
-    parser.add_argument('-u', '--username', help='user account to download (albums)')
+    parser.add_argument('-u', '--username', help='user account to download (public albums)')
     parser.add_argument('-a', '--album-id', help='album id to download')
     parser.add_argument('-s', '--start-at', type=int, default=0, help='album/image to start at (resume)')
     args = parser.parse_args()
