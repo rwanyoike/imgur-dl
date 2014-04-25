@@ -5,20 +5,15 @@ import pyimgur
 
 
 class Imgur(object):
-    album_dir = None
-    album_id = None
-    im = None
-    output = None
+
     start_at = 0
-    username = None
 
     def __init__(self, client_id, username=None, album_id=None, start_at=0):
         self.im = pyimgur.Imgur(client_id)
         self.start_at = start_at
         self.username = username if username else 'anonymous'
         self.album_id = album_id
-        # Note self.username ref
-        self.output = os.path.join('output', self.username)
+        self.output = os.path.join('output', self.username)  # note self.username ref
 
     def dl(self):
         if self.username is not 'anonymous':
