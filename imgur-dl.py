@@ -50,6 +50,13 @@ class Imgur(object):
                 self.image_download(image, ix + 1, len(images))
 
     def process_album(self, album, count, total):
+        """Return a list of images in an album.
+
+        :param album: Album object
+        :param count: image count
+        :param total: total images
+        :return: a list of the images
+        """
         album_name = '{0:02d} - {1} - {2}'.format(count, album.id.lower(), album.title)
         print('({0}/{1}) Processing {2}'.format(count, total, album_name))
         self.make_dirs(album_name)
@@ -65,6 +72,12 @@ class Imgur(object):
             os.makedirs(self.album_dir)
 
     def image_download(self, image, count, total):
+        """Download an image.
+
+        :param image: Image object
+        :param count: image count
+        :param total: total images
+        """
         image.download(self.album_dir, "{0:04d} - {1}".format(count, image.id.lower()))
         print('\t({0}/{1}) Dowloaded {2}'.format(count, total, image.id.lower()))
 
