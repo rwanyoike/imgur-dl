@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 
 import os
 import pyimgur
@@ -21,7 +22,8 @@ class Imgur(object):
         self.start_at = start_at
         self.username = username if username else 'anonymous'
         self.album_id = album_id
-        self.output = os.path.join('output', self.username)  # note self.username ref
+        self.output = os.path.join('output', self.username)  # self.username ref
+        self.album_dir = None
 
     def dl(self):
         """Download albums by user or album id."""
@@ -48,9 +50,8 @@ class Imgur(object):
                 self.image_download(image, ix + 1, len(images))
 
     def process_album(self, album, count, total):
-        album_name = '%02d - %s - %s' % (count, album.id.lower(), album.title)
-        print '(%d/%d) Processing %s' % (count, total, album_name)
-        self.makedirs(album_name)
+        album_name = '{0:02d} - {1} - {2}'.format(count, album.id.lower(), album.title)
+        print('({0}/{1}) Processing {2}'.format(count, total, album_name))
         self.make_dirs(album_name)
         return self.im.get_album(album.id).images
 
@@ -64,8 +65,8 @@ class Imgur(object):
             os.makedirs(self.album_dir)
 
     def image_download(self, image, count, total):
-        image.download(self.album_dir, "%04d - %s" % (count, image.id.lower()))
-        print '\t(%d/%d) Dowloaded %s' % (count, total, image.id.lower())
+        image.download(self.album_dir, "{0:04d} - {1}".format(count, image.id.lower()))
+        print('\t({0}/{1}) Dowloaded {2}'.format(count, total, image.id.lower()))
 
 
 if __name__ == "__main__":
